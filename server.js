@@ -10,7 +10,7 @@ app.use(cors());
 
 app.get("/news/:topic", async (req, res) => {
     const topic = req.params.topic;
-    const articles = await fetch(`${process.env.NEWS_HOST}/${topic}?sources=politico&apiKey=${process.env.NEWS_API}`).then(r => r.json())
+    const articles = await fetch(`${process.env.NEWS_HOST}/${topic}?sources=politico&apiKey=${process.env.NEWS_API}`).then(r => r.json());
     console.log(articles);
     res.send(articles);
 })
