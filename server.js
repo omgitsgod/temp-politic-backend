@@ -26,4 +26,12 @@ app.get("/votes/recent", async (req, res) => {
     res.send(votes);
 });
 
+app.get("/reps/:zip", async (req, res) => {
+
+    const zip = req.params.zip;
+    const reps = await fetch(`${process.env.CIVIC_HOST}/representatives?address=${zip}&levels=administrativeArea1&levels=country&key=${process.env.CIVIC_API_KEY}`).then(r => r.json());
+    console.log(reps);
+    res.send(reps);
+});
+
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
