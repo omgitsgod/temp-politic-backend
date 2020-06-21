@@ -11,7 +11,16 @@ app.use(cors());
 app.get("/news/:topic", async (req, res) => {
 
     const topic = req.params.topic;
-    const articles = await fetch(`${process.env.NEWS_HOST}/${topic}?sources=politico&apiKey=${process.env.NEWS_API}`).then(r => r.json());
+    const articles = await fetch(`${process.env.NEWS_HOST}/${topic}?sources=politico&apiKey=${process.env.NEWS_API_KEY}`).then(r => r.json());
+
+    console.log(articles);
+    res.send(articles);
+});
+
+app.get("/news/:name", async (req, res) => {
+
+    const name = req.params.name;
+    const articles = await fetch(`${process.env.NEWS_HOST}/everything?sources=politico&q=${name}&apiKey=${process.env.NEWS_API_KEY}`).then(r => r.json());
 
     console.log(articles);
     res.send(articles);
@@ -89,6 +98,7 @@ app.get("/events/:id", async (req, res) => {
 app.get("/congress", async (req, res) => {
 
     const congress = await fetch("https://theunitedstates.io/congress-legislators/legislators-current.json").then(r => r.json());
+
     console.log(congress);
     res.send(congress);
 });
