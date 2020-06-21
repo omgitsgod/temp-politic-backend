@@ -67,10 +67,11 @@ app.get("/bills/:id", async (req, res) => {
     res.send(bills);
 });
 
-app.get("/finance/:id", async (req, res) => {
+app.get("/finance/:id/:method", async (req, res) => {
 
     const id = req.params.id;
-    const finances = await fetch(`${process.env.SECRETS_HOST}/?method=candSummary&output=json&cid=${id}&apikey=${process.env.SECRETS_API_KEY}`).then(r => r.json());
+    const method = req.params.method;
+    const finances = await fetch(`${process.env.SECRETS_HOST}/?method=${method}&cid=${id}&apikey=${process.env.SECRETS_API_KEY}`).then(r => r.json());
 
     console.log(finances);
     res.send(finances);
