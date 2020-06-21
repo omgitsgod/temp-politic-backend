@@ -86,4 +86,11 @@ app.get("/events/:id", async (req, res) => {
     res.send(events);
 });
 
+app.get("/congress", async (req, res) => {
+
+    const congress = await fetch("https://theunitedstates.io/congress-legislators/legislators-current.json").then(r => r.json());
+    console.log(congress);
+    res.send(congress);
+});
+
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
