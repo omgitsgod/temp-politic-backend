@@ -86,6 +86,14 @@ app.get("/finance/:id/:method", async (req, res) => {
     res.send(finances);
 });
 
+app.get("/events", async (req, res) => {
+
+    const events = await fetch('http://politicalpartytime.org/api/v1/event/?start_date__gt=2020-01-01&format=json').then(r => r.json());
+
+    console.log(events);
+    res.send(events);
+});
+
 app.get("/events/:id", async (req, res) => {
 
     const id = req.params.id;
