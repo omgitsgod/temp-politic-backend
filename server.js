@@ -77,4 +77,13 @@ app.get("/finance/:id/:method", async (req, res) => {
     res.send(finances);
 });
 
+app.get("/events/:id", async (req, res) => {
+
+    const id = req.params.id;
+    const events = await fetch(`http://politicalpartytime.org/api/v1/event/?beneficiaries__crp_id=${id}&format=json`).then(r => r.json());
+
+    console.log(events);
+    res.send(events);
+});
+
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
