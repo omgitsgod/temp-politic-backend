@@ -67,4 +67,13 @@ app.get("/bills/:id", async (req, res) => {
     res.send(bills);
 });
 
+app.get("/finance/:id", async (req, res) => {
+
+    const id = req.params.id;
+    const finances = await fetch(`${process.env.SECRETS_HOST}/?method=candSummary&output=json&cid=${id}&apikey=${process.env.SECRETS_API_KEY}`).then(r => r.json());
+
+    console.log(finances);
+    res.send(finances);
+});
+
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
