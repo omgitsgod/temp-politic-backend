@@ -64,9 +64,11 @@ app.get("/reps/:zip", async (req, res) => {
 
 app.get("/bills", async (req, res) => {
 
-    const bills = await fetch(`${process.env.PROPUB_HOST}/congress/v1/116/both/bills/introduced.json`, headers: {
-        Accept: "application/json",
-        'X-API-KEY': process.env.PROPUB_API_KEY
+    const bills = await fetch(`${process.env.PROPUB_HOST}/congress/v1/116/both/bills/introduced.json`, {
+        headers: {
+            Accept: "application/json",
+            'X-API-KEY': process.env.PROPUB_API_KEY
+        }
     }).then(r => r.json());
 
     console.log(bills);
