@@ -8,6 +8,15 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 
+app.get("zip/:lat/:long", async (req, res) => {
+
+    const {lat, long} = req.params;
+    const zip = await fetch(`${process.env.GEOCODER_HOST}?prox=${lat}%2C${long}%2C250&mode=retrieveAddresses&maxresults=1&gen=9&${process.env.GEOCODER_API_KEY}`);
+
+    console.log(zip);
+    res.send(zip);
+});
+
 app.get("/news/:topic", async (req, res) => {
 
     const topic = req.params.topic;
