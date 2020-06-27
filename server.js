@@ -8,13 +8,21 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 
-app.get("zip/:lat/:long", async (req, res) => {
+app.get("/zip/:lat/:long", async (req, res) => {
 
     const {lat, long} = req.params;
     const zip = await fetch(`${process.env.GEOCODER_HOST}?prox=${lat}%2C${long}%2C250&mode=retrieveAddresses&maxresults=1&gen=9&${process.env.GEOCODER_API_KEY}`);
 
     console.log(zip);
     res.send(zip);
+});
+
+app.get("/congress", async (req, res) => {
+
+    const congress = await fetch('https://theunitedstates.io/congress-legislators/legislators-current.json').then( r => r.json());
+
+    console.log(congress);
+    res.send(congress);
 });
 
 app.get("/news/:topic", async (req, res) => {
