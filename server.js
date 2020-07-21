@@ -21,7 +21,7 @@ app.get('/congress', async (req, res) => {
 
     const congress = await fetch('https://theunitedstates.io/congress-legislators/legislators-current.json').then( r => r.json());
 
-//    console.log(congress);
+    console.log(congress);
     res.send(congress);
 });
 
@@ -119,7 +119,6 @@ app.get('/finance/:id/:method', async (req, res) => {
 
     const id = req.params.id;
     const method = req.params.method;
-    console.log(id, method)
     const finances = await fetch(`${process.env.SECRETS_HOST}/?method=${method}&cid=${id}&apikey=${process.env.SECRETS_API_KEY}`).then(r => r.json());
 
     console.log(finances);
@@ -147,7 +146,7 @@ app.get('/congress', async (req, res) => {
 
     const congress = await fetch('https://theunitedstates.io/congress-legislators/legislators-current.json').then(r => r.json());
 
-//    console.log(congress);
+    console.log(congress);
     res.send(congress);
 });
 
