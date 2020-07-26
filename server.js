@@ -150,4 +150,18 @@ app.get('/congress', async (req, res) => {
     res.send(congress);
 });
 
+app.get('/congress/search/:name', async (req, res) => {
+
+    const name = req.params.name;
+    const congress = await fetch('https://theunitedstates.io/congress-legislators/legislators-current.json').then(r => r.json());
+    const filtered = congress.filter(rep => rep.id.wikipedia.toLowerCase().includes(name.toLowerCase()));
+
+    filtered.forEach(rep => {
+        rep.search = true;
+    })
+
+    console.log(filtered);
+    res.send(filtered);
+});
+
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
