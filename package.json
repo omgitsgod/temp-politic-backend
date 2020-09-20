@@ -1,6 +1,6 @@
 {
-  "name": "temp-backend",
-  "version": "1.0.0",
+  "name": "politic-node-backend",
+  "version": "1.1.0",
   "description": "",
   "main": "server.js",
   "scripts": {
@@ -13,6 +13,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "redis": "^3.0.2"
   }
 }
