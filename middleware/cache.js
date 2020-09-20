@@ -1,17 +1,18 @@
 const redis = require('redis');
 
-const client = redis.createClient(6379);
+const REDIS_URL = process.env.REDIS_URL || 6379;
+const client = redis.createClient(REDIS_URL);
 
 function checkCache(req, res, next) {
   const id = [req.originalUrl, ...Object.values(req.params)].join(':');
   client.get(id, (err, data) => {
     if (err) {
       console.log(err);
-      res.status(500).send(err);
+      return res.status(500).send(err);
     }
     if (data) {
       console.log('retrieving cache');
-      res.send(data);
+      return res.send(data);
     } else {
       next();
     }
